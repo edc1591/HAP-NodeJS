@@ -1,4 +1,4 @@
-var bridgeAddr = "192.168.1.110:3000";
+var bridgeAddr = "localhost:3000";
 
 var request = require('request');
 
