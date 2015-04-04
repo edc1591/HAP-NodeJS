@@ -47,10 +47,13 @@ Characteristic.prototype = {
 			type: this.type,
 			perms: this.perms,
 			format: this.format,
-			value: this.value,
 			events: this.eventEnabled,
 			bonjour: this.bonjourEnabled,
 		};
+
+		if (this.perms.indexOf("pr") > -1) {
+			object["value"] = this.value;
+		}
 
 		if (this.manfDescription !== undefined) {
 			object.description = this.manfDescription;
@@ -80,7 +83,7 @@ Characteristic.prototype = {
 				var eventDict = {
 					characteristics: [
 						{
-							aid: this.accessoryID,
+							aid: this.accessoryController.accessoryID,
 							iid: this.instanceID,
 							value: this.value
 						}
