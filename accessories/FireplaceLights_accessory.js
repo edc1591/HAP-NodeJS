@@ -3,8 +3,8 @@ var types = require("./types.js")
 var bridge = require("../X10Bridge.js")
 var exports = module.exports = {};
 
-var houseCode = 3;
-var deviceID = 1;
+var houseCode = 'C';
+var deviceID = '1';
 
 exports.accessory = {
   displayName: "Fireplace Lights",

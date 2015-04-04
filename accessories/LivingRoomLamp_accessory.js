@@ -3,8 +3,8 @@ var types = require("./types.js")
 var bridge = require("../X10Bridge.js")
 var exports = module.exports = {};
 
-var houseCode = 3;
-var deviceID = 2;
+var houseCode = 'C';
+var deviceID = '2';
 
 exports.accessory = {
   displayName: "Living Room Lamp",
@@ -87,7 +87,7 @@ exports.accessory = {
 		designedMaxLength: 1    
     },{
     	cType: types.BRIGHTNESS_CTYPE,
-    	onUpdate: function(value) { console.log("Change:",value); bridge.dim(houseCode, deviceID, value); },
+    	onUpdate: function(value) { console.log("Change:",value); bridge.brightness(houseCode, deviceID, value); },
     	perms: ["pw","pr","ev"],
 		format: "int",
 		initialValue: 0,

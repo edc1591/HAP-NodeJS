@@ -1,14 +1,11 @@
 // HomeKit types required
 var types = require("./types.js")
-var bridge = require("../X10Bridge.js")
+var bridge = require("../ArduinoBridge.js")
 var exports = module.exports = {};
 
-var houseCode = 'E';
-var deviceID = '1';
-
 exports.accessory = {
-  displayName: "Lava Lamp",
-  username: "1A:2B:3C:4D:5E:FE",
+  displayName: "Colors",
+  username: "1A:2F:3C:4D:5E:FA",
   pincode: "031-45-154",
   services: [{
     sType: types.ACCESSORY_INFORMATION_STYPE, 
@@ -17,7 +14,7 @@ exports.accessory = {
     	onUpdate: null,
     	perms: ["pr"],
 		format: "string",
-		initialValue: "Lava Lamp",
+		initialValue: "Colors",
 		supportEvents: false,
 		supportBonjour: false,
 		manfDescription: "Bla",
@@ -27,7 +24,7 @@ exports.accessory = {
     	onUpdate: null,
     	perms: ["pr"],
 		format: "string",
-		initialValue: "X10",
+		initialValue: "Arduino",
 		supportEvents: false,
 		supportBonjour: false,
 		manfDescription: "Bla",
@@ -70,21 +67,47 @@ exports.accessory = {
     	onUpdate: null,
     	perms: ["pr"],
 		format: "string",
-		initialValue: "Lava Lamp",
+		initialValue: "Colors",
 		supportEvents: false,
 		supportBonjour: false,
 		manfDescription: "Bla",
 		designedMaxLength: 255   
     },{
     	cType: types.POWER_STATE_CTYPE,
-    	onUpdate: function(value) { console.log("Change:",value); bridge.power(houseCode, deviceID, value); },
+    	onUpdate: function(value) { console.log("Change:",value); bridge.power(value); },
     	perms: ["pw","pr","ev"],
 		format: "bool",
 		initialValue: false,
 		supportEvents: false,
 		supportBonjour: false,
 		manfDescription: "Turn On the Light",
-		designedMaxLength: 1    
+		designedMaxLength: 1
+    },{
+      cType: types.HUE_CTYPE,
+      onUpdate: function(value) { console.log("Change:",value); bridge.hue(value); },
+      perms: ["pw","pr","ev"],
+    format: "int",
+    initialValue: 0,
+    supportEvents: false,
+    supportBonjour: false,
+    manfDescription: "Adjust Hue of Light",
+    designedMinValue: 0,
+    designedMaxValue: 360,
+    designedMinStep: 1,
+    unit: "arcdegrees"    
+    },{
+    	cType: types.BRIGHTNESS_CTYPE,
+    	onUpdate: function(value) { console.log("Change:",value); bridge.brightness(value); },
+    	perms: ["pw","pr","ev"],
+		format: "int",
+		initialValue: 0,
+		supportEvents: false,
+		supportBonjour: false,
+		manfDescription: "Adjust Brightness of Light",
+		designedMinValue: 0,
+		designedMaxValue: 100,
+		designedMinStep: 1,
+		unit: "%"
     }]
   }]
 }

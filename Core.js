@@ -13,6 +13,9 @@ var path = require('path');
 
 var accessoriesJSON = []
 
+process.on('uncaughtException', function (err) {
+    console.log(err);
+});
 
 // Get user defined accessories from the accessories folder
 // - user defined accessory filenames must end with "_accessory.js"
